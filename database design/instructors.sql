@@ -1,3 +1,5 @@
+-- Uncomment the below code to create the table and insert the sample instructors data
+
 -- INSERT INTO airtribe.instructors (name, email, phone_number)
 -- VALUES 
 -- ('Kirtan', 'kirtan@example.com', '1234567890'),
@@ -11,4 +13,4 @@
 -- ('Yash', 'yash@example.com', '9887654322');
 -- ('Yash', 'yash@example.com', '9887654322');
 
-select * from airtribe.instructors;
+-- select * from airtribe.instructors;
