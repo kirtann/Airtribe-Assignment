@@ -58,3 +58,82 @@ exports.createCourse = (req, res) => {
     }
   );
 };
+
+// Get single course details
+exports.singleCourseDetails = (req, res) => {
+  const courseId = req.params.id;
+
+  const query = `SELECT * FROM airtribe.courses WHERE id = ${courseId}`;
+
+  db.query(query, (err, results) => {
+    if (err) {
+      res.send({
+        status: "error",
+        err,
+      });
+    }
+
+    if (results.length === 0) {
+      res.status(404).json({ error: "Course not found" });
+      return;
+    }
+    res.json({
+      status: "success",
+      message: "Course details",
+      results,
+    });
+  });
+};
+
+// Update a course
+exports.updateCourseDetails = (req, res) => {
+  const { name, max_seats, start_date } = req.body;
+  const query =
+    "UPDATE courses SET name = ?, max_seats = ?, start_date = ? WHERE id = ?";
+  db.query(
+    query,
+    [name, max_seats, start_date, req.params.id],
+    (err, result) => {
+      if (err) {
+        res.send({
+          status: "error",
+          err,
+        });
+      }
+      res.send({
+        status: "success",
+        message: "Course updated successfully",
+        result,
+      });
+    }
+  );
+};
+
+// Delete a course
+exports.deleteCourse = (req, res) => {
+  // delete the leads associated with the course to remove the reference error.
+  const prequery = "DELETE FROM leads WHERE course_id = ?";
+  const query = "DELETE FROM courses WHERE id = ?";
+  db.query(prequery, [req.params.id], (err, result) => {
+    if (err) {
+      res.send({
+        status: "error deleting the leads associated with the course.",
+        err,
+      });
+    }
+  });
+  db.query(query, [req.params.id], (err, result) => {
+    if (err) {
+      res.send({
+        status: "error",
+        err,
+      });
+    }
+    res.send({
+      status: "success",
+      warning: "Leads associated with this course have been deleted.",
+      message: "Course deleted successfully",
+      result,
+    });
+  });
+};
