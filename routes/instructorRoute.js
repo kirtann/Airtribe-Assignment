@@ -3,6 +3,9 @@ const express = require("express");
 const {
   getAllInstructors,
   createInstructor,
+  singleInstructorDetails,
+  updateInstructorDetails,
+  getCoursesByInstructor,
 } = require("../controllers/instructorsController");
 
 const router = express.Router();
