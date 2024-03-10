@@ -17,6 +17,7 @@ Follow these steps to set up and run the server:
     DATABASE_DATABASENAME=airtribe
     DB_PORT = 3306
 
+    # for docker environment
     MYSQLDB_USER=<MYSQL-IMAGE-USER(root)>
     MYSQLDB_ROOT_PASSWORD=<MYSQL-IMAGE-PASSWORD>
     MYSQLDB_DATABASE=airtribe
@@ -26,13 +27,19 @@ Follow these steps to set up and run the server:
     NODE_DOCKER_PORT=<DOCKER-SERVER-PORT>
    ```
 
-3. Make sure you have Docker and Docker Compose installed on your machine.
-4. Run the following command to start the Docker container:
+3. Without Docker, no problem. Just make the .env and do the following commands to run with npm on localhost node environment. Make sure you have Node.js on the system.
+  ```
+    npm install
+    npm run dev / npm run start
+  ```
+
+4. Make sure you have Docker and Docker Compose installed on your machine.
+5. Run the following command to start the Docker container:
    ```
    docker-compose up
    ```
-5. Once the Docker container is up and running, the server should be accessible.
-6. Run the following command to stop the Docker container:
+6. Once the Docker container is up and running, the server should be accessible.
+7. Run the following command to stop the Docker container:
    ```
    docker-compose down
    ```
