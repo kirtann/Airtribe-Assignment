@@ -3,7 +3,17 @@ const app = require("./app");
 const dotenv = require("dotenv");
 const { buildSchema } = require("./utils/buildSchema");
 
-dotenv.config({ path: "./config/config.env" });
+dotenv.config();
+
+const db = require("./config/database");
+
+db.connect((err) => {
+  if (err) {
+    console.log(err);
+    return;
+  }
+  console.log("Connected to DB successfully");
+});
 
 buildSchema();
 
